@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var val = 10;
+(function(){
+	var json = {
+					val:12,
+					abc:function(){
+						//console.log(this);
+							val+= this.val;
+						  }
+					}
+	json.abc();
+})();
+alert (val);
+
+
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

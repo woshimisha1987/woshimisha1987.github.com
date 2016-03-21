@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0;}
+li{ list-style:none;}
+ul{ width:300px; height:250px; position:absolute; left:50%; top:50%; margin-left:-150px; margin-top:-125px; perspective:800px; }
+li{ position:absolute; left:0; top:0; width:100%; height:100%; background:#0F6; text-align:center; line-height:250px; opacity:0; border:1px solid #000; -webkit-transition:all .6s ease; font-size:100px; color:#fff; font-weight:bold;}
+.cur{ display:block; z-index:5; opacity:1;}
+.l1{ -webkit-transform:translateX(-200px) rotateY(60deg); opacity:1; z-index:3;}
+.r1{ -webkit-transform:translateX(200px) rotateY(-60deg); opacity:1;  z-index:3;}
+.l2{ -webkit-transform:translateX(-300px) rotateY(70deg); z-index:1;}
+.r2{ -webkit-transform:translateX(300px) rotateY(-70deg); z-index:1;}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+	var aLi=document.querySelectorAll('li');
+	var oPrev=document.querySelector('.prev');
+	var oNext=document.querySelector('.next');
+	var arr=[];
+	for(var i=0;i<aLi.length;i++){
+		arr.push(aLi[i].className);
+	}
+	oNext.onclick=function(){
+			arr.unshift(arr.pop());
+			for(var i=0;i<aLi.length;i++){
+				aLi[i].className=arr[i];
+			}
+	};
+	oPrev.onclick=function(){
+			arr.push(arr.shift());
+			for(var i=0;i<aLi.length;i++){
+				aLi[i].className=arr[i];
+			}
+	};
+	
+	
+	
+	
+},false);
+
+
+
+
+</script>
+</head>
+
+<body>
+<a href="javascript:;" class="prev"><----</a>
+<a href="javascript:;" class="next">----></a>
+
+<ul>
+	<li class="cur">1</li>
+	<li class="r1">2</li>
+	<li class="r2">3</li>
+	<li>4</li>
+	<li>5</li>
+	<li>6</li>
+	<li>7</li>
+	<li>8</li>
+	<li>9</li>
+	<li class="l2">10</li>
+	<li class="l1">11</li>
+
+
+
+
+</ul>
+</body>
+</html>

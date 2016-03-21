@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function C1(name){
+if(name)this.name = name;
+}
+function C2(name){
+this.name = name;
+}
+function C3(name){
+this.name = name||'john';
+}
+C1.prototype.name = 'tom';
+C2.prototype.name = 'tom';
+C3.prototype.name = 'tom';
+alert ((new C1()).name + (new C2()).name + (new C3()).name);
+
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

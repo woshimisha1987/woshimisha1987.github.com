@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#box{ width:300px; height:300px; border-radius:50%; border:5px solid #000; position:absolute; left:50%; top:50%; margin-left:-150px; margin-top:-150px;}
+#box div{background:#000; position:absolute; left:50%;  border-radius:100% 100% 0 0;}
+#hour{ width:8px; height:60px; margin-left:-4px; top:90px;}
+#minu{ width:6px; height:80px; margin-left:-3px; top:70px;}
+#box #sec{width:4px; height:120px; margin-left:-2px; top:30px; background:#f00;}
+span{ width:4px; height:10px; background:#000; position:absolute; left:50%; top:0; margin-left:-2px; -webkit-transform-origin:0 150px;}
+.big{ height:20px;}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+	var oBox=document.getElementById('box');
+	var oHour=document.getElementById('hour');
+	var oMinu=document.getElementById('minu');
+	var oSec=document.getElementById('sec');
+	var N=60;
+	for(var i=0;i<N;i++){
+		var oS=document.createElement('span');
+		if(i%5){
+			oS.className='';
+		}else{
+			oS.className='big';
+			var oE=document.createElement('em');
+			oE.innerHTML=i/5||12;
+			oE.style.WebkitTransform='rotate('+-i*6+'deg)';
+			oS.appendChild(oE);
+		}
+		oS.style.WebkitTransform='rotate('+i*6+'deg)';
+		oBox.appendChild(oS);
+	}
+	
+},false);
+
+
+</script>
+</head>
+
+<body>
+<div id="box">
+	<div id="hour"></div>
+	<div id="minu"></div>
+	<div id="sec"></div>
+</div>
+
+</body>
+</html>

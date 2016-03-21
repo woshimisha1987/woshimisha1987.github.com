@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0;}
+.box{ width:700px; height:400px; background:url(img/1.jpg) no-repeat; margin:100px auto; position:relative; z-index:2;}
+.page1{ position:absolute; left:50%; top:0; width:50%; height:100%; -webkit-transform:perspective(800px) rotateY(0deg); -webkit-transform-style:preserve-3d; z-index:3; -webkit-transform-origin:left;}
+.front{ position:absolute; left:0; top:0; width:100%; height:100%; background:url(img/1.jpg) no-repeat -350px 0; -webkit-transform:translateZ(1px);}
+.back{ position:absolute; left:0; top:0; width:100%; height:100%; background:url(img/2.jpg) no-repeat; -webkit-transform:translateZ(-1px) scale(-1,1);}
+.page2{ position:absolute; right:0;top:0; width:50%; height:100%; background:url(img/2.jpg) no-repeat -350px 0; z-index:1;}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+	var oBox=document.querySelector('.box');
+	var oPage1=document.querySelector('.page1');
+	var oPage2=document.querySelector('.page2');
+	var oFront=document.querySelector('.front');
+	var oBack=document.querySelector('.back');
+	var iNow=0;
+	var bOk=false;
+	oBox.onclick=function(){
+		if(bOk)return;
+		bOk=true;
+		iNow++;
+		oPage1.style.WebkitTransition='all 1s ease';
+		oPage1.style.WebkitTransform='perspective(800px) rotateY(-180deg)';
+		
+		oPage1.addEventListener('transitionend',function(){
+			oPage1.style.WebkitTransition='none';
+			oPage1.style.WebkitTransform='perspective(800px) rotateY(0deg)';
+			oBox.style.backgroundImage='url(img/'+(iNow%3+1)+'.jpg)';
+			oFront.style.backgroundImage='url(img/'+(iNow%3+1)+'.jpg)';
+			oBack.style.backgroundImage='url(img/'+((iNow+1)%3+1)+'.jpg)';
+			oPage2.style.backgroundImage='url(img/'+((iNow+1)%3+1)+'.jpg)';
+		},false);
+		bOk=false;
+	};
+},false);
+</script>
+</head>
+
+<body>
+<div class="box">
+	<div class="page1">
+		<div class="front"></div>
+		<div class="back"></div>
+	</div>
+	<div class="page2"></div>
+</div>
+</body>
+</html>

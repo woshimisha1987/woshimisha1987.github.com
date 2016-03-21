@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0;}
+p{ width:600px; height:100px; text-align:center; line-height:100px; font-size:100px; font-weight:bold; color:#000; position:absolute; left:50%; margin-left:-300px; top:50%; margin-top:-50px; text-shadow:0 0 0 #000;}
+span{ position:absolute; left:50px; top:50px; width:100px; height:100px; background:#f90; border-radius:50%; box-shadow:0 0 100px yellow;}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+	var oP=document.querySelector('p');
+	var oS=document.querySelector('span');
+	document.onmousemove=function(ev){
+		oS.style.left=ev.clientX-oS.offsetWidth/2+'px';
+		oS.style.top=ev.clientY-oS.offsetHeight/2+'px';
+		var disX=oP.offsetLeft+oP.offsetWidth/2-(oS.offsetLeft+oS.offsetWidth/2);
+		var disY=oP.offsetTop+oP.offsetHeight/2-(oS.offsetTop+oS.offsetHeight/2);
+		var c=Math.sqrt(disX*disX+disY*disY);
+		oP.style.textShadow=disX/3+'px '+disY/3+'px '+c/10+'px #000';
+	};
+	
+},false);
+
+
+
+</script>
+</head>
+
+<body>
+<p>照我试试看</p>
+<span></span>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0;}
+body{ background:#000;}
+.box{ position:absolute; left:50%; top:50%; margin-left:-67px; margin-top:-100px; width:133px; height:200px; -webkit-transform:perspective(800px) rotateX(0deg) rotateY(0deg); -webkit-transform-style:preserve-3d;}
+.box span{ position:absolute; left:0; top:0; width:133px; height:200px;}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+	var oBox=document.querySelector('.box');
+	var N=11;
+	for(var i=0;i<N;i++){
+		var oS=document.createElement('span');
+		oS.style.background='url(img2/'+(i+1)+'.jpg)';
+		oBox.appendChild(oS);
+		oS.style.WebkitTransition='all 1s ease '+(N-i)*200+'ms';
+		(function(oS,i){
+			setTimeout(function(){
+				oS.style.WebkitTransform='rotateY('+i*360/N+'deg) translateZ(350px)';
+			},0);
+		})(oS,i);
+	}
+	var y=0;
+	var x=0;
+	var iSpeedX=0;
+	var lastX=0;
+	var iSpeedY=0;
+	var lastY=0;
+	oBox.onmousedown=function(ev){
+		var disX=ev.clientX-y;
+		var disY=ev.clientY-x;
+		document.onmousemove=function(ev){
+			y=ev.clientX-disX;
+			x=ev.clientY-disY;
+			iSpeedX=ev.clientX-lastX;
+			iSpddeY=ev.clientY-lastY;
+			lastX=ev.clientX;
+			lastY=ev.clientY;
+			oBox.style.WebkitTransform='perspective(800px) rotateX('+-x/10+'deg) rotateY('+y/10+'deg)';
+		};
+		document.onmouseup=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+			oBox.timer=setInterval(function(){
+				iSpeedX*=0.95;
+				y+=iSpeedX;
+				iSpeedY*=0.95;
+				x+=iSpeedY;
+				oBox.style.WebkitTransform='perspective(800px) rotateX('+-x/10+'deg) rotateY('+y/10+'deg)';
+				if(iSpeedX<1)iSpeedX=0;
+				if(iSpeedY<1)iSpeedY=0;
+				if(iSpeedX==0&&iSpeedY==0){
+					clearInterval(oBox.timer);
+				}
+			},30);
+		};
+		return false;
+	};
+	
+},false);
+
+
+
+
+</script>
+</head>
+
+<body>
+<div class="box"></div>
+</body>
+</html>

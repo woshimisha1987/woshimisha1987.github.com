@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style></style>
+    <script>
+        function C1(name){
+            /*
+            *判断有没有传进来的参数，如果有的话，给它定义一个name属性
+            * 如果没有的话，自动从原型链上找相应的name属性
+            */
+            if(name)this.name = name;
+        }
+        function C2(name){
+            /*
+             * name没有传参进来this.name=undefined
+             * 由于undefined也是一种数据类型，代表有，根据原型链效果，找到了就不往上找
+             * 所以它的name属性值是undefined
+            */
+            this.name = name;
+        }
+        function C3(name){
+            /*
+            *name没有传参，||表达式，找到后面的“john”
+            * 定义了this.name=john;
+            * C3这个构造函数上面的name属性就是john，有值了，就不往原型链上找
+            *
+            */
+            this.name = name||'john';
+        }
+        C1.prototype.name = 'tom';
+        C2.prototype.name = 'tom';
+        C3.prototype.name = 'tom';
+        alert ((new C1()).name + (new C2()).name + (new C3()).name);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

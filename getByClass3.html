@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style></style>
+<script>
+function getByClass(oParent,sClass){
+	if(oParent.getElementsByClassName){
+		return oParent.getElementsByClassName(sClass);
+	}else{
+		var aEle=document.getElementsByTagName('*');
+		var result=[];
+		var re=new RegExp('\\b'+sClass+'\\b','g');
+		for(var i=0;i<aEle.length;i++){
+			if(aEle[i].className.search(re)!=-1){
+				result.push(aEle[i]);
+			}
+		}
+		return result;
+	}
+}
+window.onload=function(){
+	var oBox=document.getElementById('box');
+	var aAll=getByClass(oBox,'on');
+	for(var i=0;i<aAll.length;i++){
+		aAll[i].style.background='red';
+	}
+};
+</script>
+</head>
+
+<body>
+<div id="box">
+	<div class="on">111111111111</div>
+	<p class="on2 box">2222222222222222</p>
+	<span class="on box2">3333333333333</span>
+</div>
+</body>
+</html>
